@@ -19,12 +19,12 @@ pipeline {
     }
     stage('get branch') {
         steps {
-            sh 'echo env.BRANCH_NAME'
+            sh 'echo $BRANCH_NAME'
         }
     }
     stage('deploy master') {
         when {
-            expression { env.BRANCH_NAME.startsWITH("master") }
+            expression { env.BRANCH_NAME.startsWith("master") }
         }
         steps {
             sh 'echo Deploying Master'
@@ -32,7 +32,7 @@ pipeline {
     }
     stage('deploy release') {
         when {
-            expression { env.BRANCH_NAME.startsWITH("release") }
+            expression { env.BRANCH_NAME.startsWith("release") }
         }
         steps {
             sh 'echo Deploying Release'
@@ -40,7 +40,7 @@ pipeline {
     }
     stage('deploy pull request') {
         when {
-            expression { env.BRANCH_NAME.startsWITH("PR") }
+            expression { env.BRANCH_NAME.startsWith("PR") }
         }
         steps {
             sh 'echo Deploying Pull Request'
