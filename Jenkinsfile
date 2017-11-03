@@ -22,21 +22,28 @@ pipeline {
             sh 'echo env.BRANCH_NAME'
         }
     }
-    stage('deploy') {
-        if (env.BRANCH_NAME.startsWITH("master")) {
-            steps {
-                sh 'echo Deploying Master'
-            }
+    stage('deploy master') {
+        when {
+            expression { env.BRANCH_NAME.startsWITH("master") }
         }
-        if (env.BRANCH_NAME.startsWITH("release")) {
-            steps {
-                sh 'echo Deploying Release'
-            }
+        steps {
+            sh 'echo Deploying Master'
         }
-        if (env.BRANCH_NAME.startsWITH("PR")) {
-            steps {
-                sh 'echo Deploying Pull Request'
-            }
+    }
+    stage('deploy release') {
+        when {
+            expression { env.BRANCH_NAME.startsWITH("release") }
+        }
+        steps {
+            sh 'echo Deploying Release'
+        }
+    }
+    stage('deploy pull request') {
+        when {
+            expression { env.BRANCH_NAME.startsWITH("PR") }
+        }
+        steps {
+            sh 'echo Deploying Pull Request'
         }
     }
   }
