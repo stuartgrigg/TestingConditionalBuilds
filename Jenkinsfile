@@ -44,6 +44,19 @@ pipeline {
         }
         steps {
             sh 'echo Deploying Pull Request'
+            def SHA1 = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
+            def body="""{
+                     "body": "Nice change",
+                     "commit_id": "$SHA1",
+                     "path": "/",
+                     "position": 0
+               }"""
+            httpRequest authentication: '${stuartgrigg}', httpMode: 'POST', requestBody: body,  url: 'https://api.github.com/repos/stuartgrigg/TestingConditionalBuilds/issues/1/comments'
+        }
+    }
+    stage('try stuff') {
+        steps {
+
         }
     }
   }
