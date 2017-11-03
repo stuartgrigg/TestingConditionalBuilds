@@ -49,7 +49,9 @@ pipeline {
     stage('try stuff') {
         steps {
             sh './things.sh'
-            currentBuild.result='UNSTABLE'
+            script {
+                currentBuild.result='UNSTABLE'
+            }
         }
     }
   }
