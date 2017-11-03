@@ -19,7 +19,24 @@ pipeline {
     }
     stage('get branch') {
         steps {
-            sh 'echo $BRANCH_NAME'
+            sh 'echo env.BRANCH_NAME'
+        }
+    }
+    stage('deploy') {
+        if (env.BRANCH_NAME.startsWITH("master")) {
+            steps {
+                sh 'echo Deploying Master'
+            }
+        }
+        if (env.BRANCH_NAME.startsWITH("release")) {
+            steps {
+                sh 'echo Deploying Release'
+            }
+        }
+        if (env.BRANCH_NAME.startsWITH("PR")) {
+            steps {
+                sh 'echo Deploying Pull Request'
+            }
         }
     }
   }
