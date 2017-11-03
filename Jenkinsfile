@@ -45,6 +45,7 @@ pipeline {
         steps {
             sh 'echo Deploying Pull request'
         }
+    }
     stage('try stuff') {
         steps {
             sh './things.sh'
