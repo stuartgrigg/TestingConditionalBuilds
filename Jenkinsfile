@@ -52,6 +52,14 @@ pipeline {
             script {
                 currentBuild.result='UNSTABLE'
                 print currentBuild.absoluteUrl
+                def SHA1 = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
+                def body="""{
+                         "body": "Nice change",
+                         "commit_id": "$SHA1",
+                         "path": "/",
+                         "position": 0
+                   }"""
+                httpRequest httpMode: 'POST', requestBody: body,  url: 'https://api.github.com/repos/stuartgrigg/TestingConditionalBuilds/pull/1/comments'
             }
         }
     }
