@@ -44,7 +44,6 @@ pipeline {
         }
         steps {
             sh 'echo Deploying Pull request'
-            setGitHubPullRequestStatus(context: env.JOB_NAME, message: "All is good", state: 'SUCCESS')
         }
     }
     stage('try stuff') {
