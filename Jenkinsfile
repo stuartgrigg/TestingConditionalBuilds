@@ -50,7 +50,6 @@ pipeline {
         steps {
             sh './things.sh'
             script {
-                currentBuild.result='UNSTABLE'
                 print currentBuild.absoluteUrl
             }
         }
