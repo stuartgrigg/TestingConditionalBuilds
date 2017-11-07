@@ -52,6 +52,7 @@ pipeline {
             script {
                 print currentBuild.absoluteUrl
             }
+            sh 'git tag -l --contains HEAD'
         }
     }
   }
