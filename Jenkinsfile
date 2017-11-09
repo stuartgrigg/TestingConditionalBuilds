@@ -13,6 +13,9 @@ pipeline {
           steps {
             sh 'docker build -t app_2 app_2'
             sh 'docker run app_2'
+            script {
+              currentBuild.result='UNSTABLE'
+            }
           }
         }
       }
@@ -28,9 +31,6 @@ pipeline {
         }
         steps {
             sh 'echo Deploying Master'
-            script {
-              currentBuild.result='UNSTABLE'
-            }
         }
     }
     stage('deploy release') {
