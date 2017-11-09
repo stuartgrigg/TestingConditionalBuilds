@@ -13,9 +13,8 @@ pipeline {
           steps {
             sh 'docker build -t app_2 app_2'
             sh 'docker run app_2'
-            script {
-              currentBuild.result='UNSTABLE'
-            }
+            currentBuild.result='UNSTABLE'
+            throw
           }
         }
       }
