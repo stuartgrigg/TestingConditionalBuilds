@@ -28,6 +28,9 @@ pipeline {
         }
         steps {
             sh 'echo Deploying Master'
+            script {
+              currentBuild.result='UNSTABLE'
+            }
         }
     }
     stage('deploy release') {
