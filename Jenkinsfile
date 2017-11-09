@@ -55,15 +55,15 @@ pipeline {
             sh 'echo Deploying Pull request'
         }
     }
-    stage('try stuff') {
-        steps {
-            sh './things.sh'
-            script {
-                print currentBuild.absoluteUrl
-            }
-            sh 'git fetch --tags'
-            sh 'git tag -l --contains HEAD'
+    stage('set tag') {
+      steps {
+        script {
+          sh 'git fetch --tags'
+          sh 'git tag -l --contains HEAD > tags'
+          env.TAG = readFile('tags')
         }
+        sh 'echo $TAG'
+      }
     }
   }
 }
