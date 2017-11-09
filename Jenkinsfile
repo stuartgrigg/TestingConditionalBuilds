@@ -20,7 +20,7 @@ pipeline {
     stage('get branch') {
         steps {
             sh 'echo $BRANCH_NAME'
-            sh 'exit 1'
+            sh 'exit 2'
         }
     }
     stage('deploy master') {
