@@ -14,7 +14,7 @@ pipeline {
             sh 'docker build -t app_2 app_2'
             sh 'docker run app_2'
             currentBuild.result='UNSTABLE'
-            throw
+            error('test failed')
           }
         }
       }
