@@ -13,15 +13,13 @@ pipeline {
           steps {
             sh 'docker build -t app_2 app_2'
             sh 'docker run app_2'
-            currentBuild.result='UNSTABLE'
-            error('test failed')
-          }
         }
       }
     }
     stage('get branch') {
         steps {
             sh 'echo $BRANCH_NAME'
+            sh 'exit 1'
         }
     }
     stage('deploy master') {
