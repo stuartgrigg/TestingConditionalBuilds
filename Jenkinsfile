@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('build and test apps') {
+    stage('build apps') {
       parallel {
         stage('app1') {
           steps {
@@ -17,11 +17,19 @@ pipeline {
         }
       }
     }
-    stage('get branch') {
-        steps {
-            sh 'echo $BRANCH_NAME'
-            sh 'exit 2'
+    stage('test apps') {
+      parallel {
+        stage('app1') {
+          steps {
+            sh 'echo testing app 1'
+          }
         }
+        stage('app2') {
+          steps {
+            sh 'echo testing app 1'
+          }
+        }
+      }
     }
     stage('deploy master') {
         when {
