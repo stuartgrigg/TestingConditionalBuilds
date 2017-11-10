@@ -69,7 +69,7 @@ pipeline {
     }
     stage('tag conditional step') {
       when {
-        { environment name: 'TAG', value: 'do' }
+        environment name: 'TAG', value: 'doit'
       }
       steps {
           sh 'echo Do It!'
