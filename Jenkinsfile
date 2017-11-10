@@ -74,11 +74,11 @@ pipeline {
     }
     stage('use credentials') {
       environment {
-        SECRET_KEY = credentials('SECRET_KEY')
+        SECRET_KEY = credentials('SECRET_KY')
       }
       steps {
         sh 'echo $TAG'
-        sh 'echo $SECRET_KEY'
+        echo "$SECRET_KEY"
       }
     }
   }
