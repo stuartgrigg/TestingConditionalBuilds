@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    SECRET_KEY = credentials('SECRET_KEY')
+  }
   stages {
     stage('build apps') {
       parallel {
@@ -73,9 +76,6 @@ pipeline {
       }
     }
     stage('use credentials') {
-      environment {
-        SECRET_KEY = credentials('SECRET_KEY')
-      }
       steps {
         sh 'echo $SECRET_KEY'
       }
