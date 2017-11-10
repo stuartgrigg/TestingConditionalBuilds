@@ -62,7 +62,22 @@ pipeline {
           sh 'git tag -l --contains HEAD > tags'
           env.TAG = readFile('tags')
         }
-        sh 'echo $TAG'
+      }
+    }
+    stage('tag conditional step') {
+      when {
+        { environment name: 'TAG', value: 'do' }
+      }
+      steps {
+          sh 'echo Do It!'
+      }
+    }
+    stage('use credentials') {
+      environment {
+        SECRET_KEY = credentials('SECRET_KEY')
+      }
+      steps {
+        sh 'echo $SECRET_KEY'
       }
     }
   }
