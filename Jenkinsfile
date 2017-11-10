@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  environment {
-    SECRET_KEY = credentials('SECRET_KEY')
-  }
   stages {
     stage('build apps') {
       parallel {
@@ -69,14 +66,18 @@ pipeline {
     }
     stage('tag conditional step') {
       when {
-        environment name: 'TAG', value: 'doit'
+        expression { env.TAG.startsWith("do") }
       }
       steps {
           sh 'echo Do It!'
       }
     }
     stage('use credentials') {
+      environment {
+        SECRET_KEY = credentials('SECRET_KEY')
+      }
       steps {
+        sh 'echo $TAG'
         sh 'echo $SECRET_KEY'
       }
     }
