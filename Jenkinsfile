@@ -9,7 +9,9 @@ pipeline {
           def sha = sh(script:'git rev-parse HEAD', returnStdout: true).trim()
           for(i = 0; i < arr.size(); i += 1) {
               artefacts[arr[i]] = {
-                build job: 'Slave_Pipe', parameters: [string(name: 'commit', value: sha)], wait: true, propagate: true
+                node('k8s') {
+                    sh "echo from k8s"
+                }
               }
           }
           parallel artefacts
