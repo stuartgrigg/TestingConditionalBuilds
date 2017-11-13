@@ -8,9 +8,10 @@ pipeline {
           def artefacts = [:]
           def sha = sh(script:'git rev-parse HEAD', returnStdout: true).trim()
           for(i = 0; i < arr.size(); i += 1) {
+              def artefact = arr[i]
               artefacts[arr[i]] = {
                 node('k8s') {
-                    sh "echo ${arr[i]}"
+                    sh "echo ${artefact}"
                     sh "echo ${sha}"
                 }
               }
