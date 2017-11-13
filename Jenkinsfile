@@ -10,7 +10,8 @@ pipeline {
           for(i = 0; i < arr.size(); i += 1) {
               artefacts[arr[i]] = {
                 node('k8s') {
-                    sh "ls -l"
+                    sh "echo ${arr[i]}"
+                    sh "echo ${sha}"
                 }
               }
           }
